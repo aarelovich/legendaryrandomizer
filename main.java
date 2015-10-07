@@ -20,7 +20,14 @@ public class main {
         p.add(5);
         p.add(6);
         
+        int N = 300;
         pe = new ProbabilityEngine(p);
+        
+        System.err.println("Drawing numbers " + N + " numbers");
+        for (int i = 0; i < N; i++){
+          System.err.print(pe.getRandomNumber() +  " ");        
+        }
+        System.err.println("");
         
     }
 
