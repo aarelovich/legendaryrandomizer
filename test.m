@@ -10,10 +10,21 @@ m = min(numbers);
 M = max(numbers);
 all = m:M;
 
-count = zeros(1,length(all))
+count = zeros(1,length(all));
 
 for i = all
   count(i+1) = length(find(numbers == i));
 end
+
+p = count/sum(count)
+
+%% Test.
+t = (1:6)/sum(1:6);
+
+[X Y] = meshgrid(t,t);
+c = abs(X-Y);
+c(c == 0) = 1e6;
+d = min(min(c))
+K = 100/d
 
 disp('Done')
