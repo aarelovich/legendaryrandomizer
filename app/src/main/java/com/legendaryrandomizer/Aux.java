@@ -136,7 +136,7 @@ public class Aux {
                                                                 "Rocket Raccoon",
                                                                 "Drax The Destroyer");
 
-    public static final List<String> MastermindGG = Arrays.asList(  "Thanos",
+    public static final List<String> MastermindGG = Arrays.asList(  "Thanos, the Mad Titan",
                                                                     "Supreme Intelligence");
 
     public static final List<String> SchemeGG = Arrays.asList(  "Intergalactic Kree Nega-Bomb",
@@ -204,10 +204,10 @@ public class Aux {
     public static final int EXP_GG = 3;
     public static final int EXP_SW = 4;
 
+    //============================== Some Paths =======================================
+    public static String WORKDIR = "lgndrnd";
+    public static String STATFILE = "stats.dat";
 
-    public static final int EXTRA_HERO = 1;
-    public static final int EXTRA_VILLAINGROUP = 2;
-    public static final int EXTRA_HENCHMEN = 3;
 
 
 }
