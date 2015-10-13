@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -210,9 +211,10 @@ public class LegendaryRandomizer extends Activity {
                 selectionPressed();
             }
         });
+
         nchooser.addView(nplayers);
-        nchooser.addView(components);
         nchooser.addView(choose);
+        nchooser.addView(components);
 
         Button tester = new Button(this);
         if (DEBUG) {
@@ -245,6 +247,9 @@ public class LegendaryRandomizer extends Activity {
         if (DEBUG){
             global.addView(tester);
         }
+
+        // Prevent the screen from turning off
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(global);
 
