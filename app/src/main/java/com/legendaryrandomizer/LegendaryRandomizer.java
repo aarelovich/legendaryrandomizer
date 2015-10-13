@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Environment;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.ScrollingMovementMethod;
@@ -25,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -132,15 +134,14 @@ public class LegendaryRandomizer extends Activity {
     // Flag for debugging
     private static final boolean DEBUG = false;
 
-    // Value to add more "randomness"
-    private static final int SHUFFLE_VALUE = 10;
-
     // Deck ids
     private static final int DECK_HERO = 0;
     private static final int DECK_VILLAIN = 1;
 
-    // Random number generator
-    private SecureRandom random = new SecureRandom();
+    // Probability engine for selecting random cards.
+    private ProbabilitySet probEngine;
+
+    //========================= SETUP =========================
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,7 +253,17 @@ public class LegendaryRandomizer extends Activity {
             Aux.checkedExpansions[i] = true;
         }
 
+        // Making sure the directory exists.
+        createWorkDir();
+
+        // Probability engine
+        probEngine = new ProbabilitySet();
+        probEngine.setSaveFile(Aux.WORKDIR+"/"+Aux.STATFILE);
+        probEngine.initSet();
+
     }
+
+    //========================= CONFIG DIALOG & FILE SETUP =========================
 
     // Configuration dialog that shows all expansions, to select which to include.
     public void configDialog(){
@@ -277,6 +288,25 @@ public class LegendaryRandomizer extends Activity {
         diag.show();
     }
 
+    public void createWorkDir(){
+        // Setting up the working directory
+        Aux.WORKDIR = Environment.getExternalStorageDirectory().getPath() + "/" + Aux.WORKDIR;
+
+        // Making sure the directory exists
+        File f = new File(Aux.WORKDIR);
+        if (!f.exists()) {
+            // Creating the directory
+            if (!f.mkdir()){
+                Toast t = Toast.makeText(this,"ERROR: Could not create directory: " + Aux.WORKDIR,Toast.LENGTH_LONG);
+                t.show();
+                return;
+            }
+        }
+    }
+
+    //========================= DRAWING THE DECKS ====================
+
+    // Changing the pool of decks to choose from
     public void poolChanged(){
         heropool.clear();
         vgpool.clear();
@@ -327,34 +357,31 @@ public class LegendaryRandomizer extends Activity {
             schpool.addAll(Aux.SchemeSW);
         }
 
-        if (DEBUG) {
-            System.err.println("====== Listing all possible Villains ======");
-            for (int i = 0; i < vgpool.size(); i++) {
-                System.err.println(vgpool.get(i));
-            }
-        }
+        // Need to load the sets of values for each of the probability sets.
+
 
     }
 
-    // Functions that select the mastermind and a scheme.
+    // Selecting the Mastermind
     private void selMastermind() {
         if (mmpool.isEmpty()){
             Toast t = Toast.makeText(this,"No more masterminds",Toast.LENGTH_SHORT);
             t.show();
             return;
         }
-        int pos = getRandomPosition(mmpool.size());
+        int pos = getRandomPosition(mmpool);
         Mastermind = mmpool.get(pos);
         mmpool.remove(pos);
     }
 
+    // Selecting the Scheme.
     private void selScheme() {
         if (schpool.isEmpty()){
             Toast t = Toast.makeText(this,"No more schemes",Toast.LENGTH_SHORT);
             t.show();
             return;
         }
-        int pos = getRandomPosition(schpool.size());
+        int pos = getRandomPosition(schpool);
         Scheme = schpool.get(pos);
         schpool.remove(pos);
     }
@@ -457,7 +484,7 @@ public class LegendaryRandomizer extends Activity {
             switch (cardtype) {
                 case ReqContainer.CT_HENCHMEN:
                     if (!hmpool.isEmpty()) {
-                        pos = getRandomPosition(hmpool.size());
+                        pos = getRandomPosition(hmpool);
                         if (pos > -1) {
                             name = hmpool.get(pos);
                             name = name + "-";
@@ -467,7 +494,7 @@ public class LegendaryRandomizer extends Activity {
                     break;
                 case ReqContainer.CT_HEROS:
                     if (!heropool.isEmpty()) {
-                        pos = getRandomPosition(heropool.size());
+                        pos = getRandomPosition(heropool);
                         if (pos > -1) {
                             name = heropool.get(pos);
                             name = name + "+";
@@ -477,7 +504,7 @@ public class LegendaryRandomizer extends Activity {
                     break;
                 case ReqContainer.CT_MASTERMINDS:
                     if (!mmpool.isEmpty()) {
-                        pos = getRandomPosition(mmpool.size());
+                        pos = getRandomPosition(mmpool);
                         if (pos > -1) {
                             name = mmpool.get(pos);
                             mmpool.remove(pos);
@@ -486,7 +513,7 @@ public class LegendaryRandomizer extends Activity {
                     break;
                 case ReqContainer.CT_VILLAINS:
                     if (!vgpool.isEmpty()) {
-                        pos = getRandomPosition(vgpool.size());
+                        pos = getRandomPosition(vgpool);
                         if (pos > -1) {
                             name = vgpool.get(pos);
                             name = name + "=";
@@ -612,6 +639,8 @@ public class LegendaryRandomizer extends Activity {
         }
     }
 
+    //========================= AUX FUNCTIONS =========================
+
     // Function that adds colored and font changed text to the spannable string builder
     public void addText(SpannableStringBuilder text, String str, int color, int size, Typeface font){
         int start = text.toString().length();
@@ -622,57 +651,82 @@ public class LegendaryRandomizer extends Activity {
         text.setSpan(new ForegroundColorSpan(color), start, end, 0);
     }
 
-    public int getRandomPosition(int size){
-        for (int i = 0; i < SHUFFLE_VALUE; i++) random.nextInt(size);
-        return random.nextInt(size);
+    public int getRandomPosition(List<String> list){
+
+        // Setting the list as the subset
+        probEngine.setSubset(list);
+
+        // Getting the random id.
+        int id = probEngine.getRandomId();
+
+        // Saving the new data
+        probEngine.saveSet();
+
+        return id;
+
     }
 
     // Functions to run random diagnostics
     public void RunTests(){
 
-        // Resetting the pool of cards
-        poolChanged();
+        int N = 40;
 
-        // Test Heros
-        DrawRandomValues(heropool,10000,"HEROS");
-
-        // Test Villains
-        DrawRandomValues(vgpool,10000,"VILLAINS");
-
-    }
-    private void DrawRandomValues(List<String> list, int N, String idx){
-
-        HashMap<String,Integer> res = new HashMap<>();
-
-        //Random random = new Random();
-        SecureRandom random = new SecureRandom();
-
-        // Drawing the cards
+        ArrayList<String> names = new ArrayList<>();
         for (int i = 0; i < N; i++){
-            int pos = getRandomPosition(list.size());
-            String value = list.get(pos);
-            if (res.containsKey(value)){
-                res.put(value,res.get(value)+1);
-            }
-            else{
-                res.put(value,1);
+            names.add("N"+Integer.toString(i+1));
+        }
+
+
+        ArrayList<String> found = new ArrayList<>();
+        SecureRandom random = new SecureRandom();
+        int count = 0;
+        boolean done = false;
+        int next = 0;
+
+        while (!done){
+            next = random.nextInt(N);
+            count++;
+            if (found.indexOf(names.get(next)) == -1){
+                found.add(names.get(next));
+                if (found.size() == names.size()){
+                    done = true;
+                }
             }
         }
 
-        // Getting the results
-        System.err.println("====== LISTING " + idx + " (" + list.size() + ") ======");
-        float total = 0;
-        float Higest = 0;
-        float Lowest = 100;
-        for (Map.Entry<String, Integer> entry : res.entrySet()) {
-            float per = (float)(entry.getValue()*100.0/N);
-            total = total + per;
-            System.out.println(entry.getKey() + " : " + per);
-            Higest = Math.max(Higest,per);
-            Lowest = Math.min(Lowest,per);
+        System.err.println("Normal random took " + count  + " tries to get all " + N + " values");
+
+        // Now with the probability engine
+
+        ProbabilitySet ps = new ProbabilitySet();
+
+        for (int i = 0; i < names.size(); i++){
+            ps.addPair(names.get(i),20);
         }
-        System.err.println("TOTAL = " + total + ". Highest: " + Higest + ". Lowest: " + Lowest);
+
+        ps.setSubset(names);
+
+        count = 0;
+        done = false;
+        found.clear();
+
+        while (!done){
+            next = ps.getRandomId();
+            count++;
+
+            //System.err.println("Getting " + next);
+
+            if (found.indexOf(names.get(next)) == -1){
+                found.add(names.get(next));
+                if (found.size() == names.size()){
+                    done = true;
+                }
+            }
+        }
+
+        System.err.println("PE took " + count  + " tries to get all " + N + " values");
 
     }
+
 
 }
