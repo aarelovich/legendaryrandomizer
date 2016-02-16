@@ -26,14 +26,15 @@ public class ReqContainer {
     public static final int CT_MASTERMINDS = 6;
     public static final int CT_TWISTS = 7;
     public static final int CT_MST = 8;
-    public static final int TOTAL_CT = 9;
+    public static final int CT_AMBITION = 9;
+    public static final int TOTAL_CT = 10;
 
     // List of card types that might need to be randomized, becasue they are named groups and are not all the same.
     public static List<Integer> NAMED_CARDTYPES = Arrays.asList(CT_HENCHMEN,CT_HEROS,CT_MASTERMINDS,CT_VILLAINS);
 
     // List of card types that will only be specified in numbers
-    public static List<Integer> NUMBER_CARDTYPES = Arrays.asList(CT_SIDEKICKS,CT_BYSTADERS,CT_WOUNDS,CT_TWISTS,CT_MST);
-    public static List<String> NUMBER_CARDTYPES_NAMES = Arrays.asList("Sidekicks","Bystanders","Wounds","Scheme Twists","Master Strikes");
+    public static List<Integer> NUMBER_CARDTYPES = Arrays.asList(CT_SIDEKICKS,CT_BYSTADERS,CT_WOUNDS,CT_TWISTS,CT_MST,CT_AMBITION);
+    public static List<String> NUMBER_CARDTYPES_NAMES = Arrays.asList("Sidekicks","Bystanders","Wounds","Scheme Twists","Master Strikes","Ambitions");
 
 
     public static final int MAXPLAYERS = 5;
@@ -84,7 +85,7 @@ public class ReqContainer {
             vdeck[3][CT_BYSTADERS] = 8;
             vdeck[3][CT_MST] = 5;
 
-            // 4 Player default requisites
+            // 5 Player default requisites
             hdeck[4][CT_HEROS] = 6;
 
             vdeck[4][CT_VILLAINS] = 4;
@@ -363,7 +364,7 @@ public class ReqContainer {
         req.addSpecialInstructionForAll("Twists equal to the number of players + 5. 30 Shards in supply");
         Reqs.put("Unite the Shards", req);
 
-        // Secret wars expansion
+        // Secret wars expansion volume 1
         req = new Requisites();
         req.setVDForAll(CT_TWISTS, 9);
         req.addVDExtraForAll(CT_HENCHMEN);
@@ -404,6 +405,45 @@ public class ReqContainer {
         req.setVDForAll(CT_TWISTS, 5);
         req.addVDExtra(0, CT_VILLAINS);
         Reqs.put("Crush them with my bare hands", req);
+
+        // Secret wars volume 2
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        req.setVDForAll(CT_AMBITION, 10);
+        Reqs.put("Sinister Ambitions", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        req.addVDExtraForAll(CT_VILLAINS);
+        Reqs.put("Deadlands Hordes Charge the Wall", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        Reqs.put("Enthrone the Barons of Battleworld", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        Reqs.put("Master the Mysteries of Kung-Fu", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        Reqs.put("Secret Wars", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        req.setVD(0, CT_TWISTS, 4);
+        Reqs.put("The Fountain of Eternal Life", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 8);
+        Reqs.put("The God-Emperor of Battleworld", req);
+
+        req = new Requisites();
+        req.setVDForAll(CT_TWISTS, 10);
+        req.setVDNameForAll(CT_HENCHMEN, "Khonshu Guardians");
+        req.setVDForAll(CT_HEROS,1);
+        Reqs.put("The Mark of Khonshu", req);
+
 
         // ================== Allways Leads ==============
 
@@ -460,7 +500,7 @@ public class ReqContainer {
 
         follows = new MMFollowers();
         follows.name = "Doombot Legion";
-        follows.type = CT_HENCHMEN; // So far the only mastermind that leads henchmen.
+        follows.type = CT_HENCHMEN;
         AllwaysLeads.put("Dr. Doom",follows);
 
         // Fantastic Four Expansion
@@ -490,6 +530,23 @@ public class ReqContainer {
         follows.name = "Kree Starforce";
         AllwaysLeads.put("Supreme Intelligence",follows);
 
+        // Secret Wars Volume 2 Expansion
+        follows = new MMFollowers();
+        follows.name = "Utopolis";
+        AllwaysLeads.put("King Hyperion",follows);
+
+        follows = new MMFollowers();
+        follows.name = "Spider-Infected";
+        follows.type = CT_HENCHMEN;
+        AllwaysLeads.put("Spider Queen",follows);
+
+        follows = new MMFollowers();
+        follows.name = "Monster Metropolis";
+        AllwaysLeads.put("Shiklah, the Demon Bride",follows);
+
+        follows = new MMFollowers();
+        follows.name = "K'un Lun";
+        AllwaysLeads.put("Immortal Emperor Zheng-Zhu",follows);
 
 
     }

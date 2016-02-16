@@ -362,6 +362,14 @@ public class LegendaryRandomizer extends Activity {
             schpool.addAll(Aux.SchemeSW);
         }
 
+        if (Aux.checkedExpansions[Aux.EXP_SW2]){
+            heropool.addAll(Aux.HerosSW2);
+            vgpool.addAll(Aux.VillainGroupSW2);
+            hmpool.addAll(Aux.HenchmenSW2);
+            mmpool.addAll(Aux.MastermindSW2);
+            schpool.addAll(Aux.SchemeSW2);
+        }
+
         // Need to load the sets of values for each of the probability sets.
 
 

@@ -147,7 +147,7 @@ public class Aux {
     public static final List<String> VillainGroupGG = Arrays.asList("Kree Starforce",
                                                                     "Infinity Gems");
 
-    //================================= Secret Wars Expansion =================================
+    //============================ Secret Wars Expansion Volume 1 =============================
     public static final List<String> HerosSW = Arrays.asList(   "Apocalyptic K. Pride",
                                                                 "Captain Marvel",
                                                                 "Black Bolt",
@@ -189,12 +189,59 @@ public class Aux {
                                                                 "Thor Corps",
                                                                 "M.O.D.O.K.S");
 
+    //============================ Secret Wars Expansion Volume 2 =============================
+    public static final List<String> HerosSW2 = Arrays.asList(   "Beast",
+            "Captain Britain",
+            "Corvus Glaive",
+            "Black Swan",
+            "Ruby Summers",
+            "Time Traveling Jean Grey",
+            "Phoenix Force Cyclops",
+            "Soulsword Colossus",
+            "Silk",
+            "Agent Venom",
+            "Spider-Gwen",
+            "Shang-Chi",
+            "Dr. Punisher, Soldier Supreme",
+            "Elsa Bloodstone",
+            "The Captain and the Devil",
+            "Arkkon the Magnificent");
+
+    public static final List<String> MastermindSW2 = Arrays.asList(  "King Hyperion",
+            "Spider Queen",
+            "Shiklah, the Demon Bride",
+            "Immortal Emperor Zheng-Zhu");
+
+    public static final List<String> SchemeSW2 = Arrays.asList(  "Sinister Ambitions",
+            "Deadlands Hordes Charge the Wall",
+            "Enthrone the Barons of Battleworld",
+            "Master the Mysteries of Kung-Fu",
+            "Secret Wars",
+            "The Fountain of Eternal Life",
+            "The God-Emperor of Battleworld",
+            "The Mark of Khonshu");
+
+    public static final List<String> VillainGroupSW2 = Arrays.asList("Utopolis",
+            "Guardians fo Knowhere",
+            "Deadpool's Secret Secret Wars",
+            "X-Men 92",
+            "K'un Lun",
+            "Monster Metropolis");
+
+
+    public static final List<String> HenchmenSW2 = Arrays.asList("Magma Men",
+            "Spider-Infected",
+            "Khonshu Guardians");
+
+
+
     //================================= AUX CONSTANTS=================================
     public static final List<String> Expansions = Arrays.asList("Fantastic Four",
                                                                 "Dark City",
                                                                 "Paint the Town Red",
                                                                 "Guardians of the Galaxy",
-                                                                "Secret Wars");
+                                                                "Secret Wars V1",
+                                                                "Secret Wars V2");
 
 
     public static final boolean[] checkedExpansions = new boolean[Expansions.size()];
@@ -203,6 +250,7 @@ public class Aux {
     public static final int EXP_PTR = 2;
     public static final int EXP_GG = 3;
     public static final int EXP_SW = 4;
+    public static final int EXP_SW2 = 5;
 
     //============================== Some Paths =======================================
     public static String WORKDIR = "lgndrnd";

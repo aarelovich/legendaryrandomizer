@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/classes-59a4cd0ce1f46c0855437d207531c398c29d1d65.jar" />
-    </item>
-    <item
-        jar="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/classes-f1795df7b8f3e5bbf8909f17537acc1a8fc8df99.jar" />
-    </item>
-    <item
-        jar="/home/ariel/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jar="/home/ariela/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-071debeb962c1417f9993cd2bb0b4e6ddb6d53b1.jar" />
+        <dex dex="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-a7af8412c2feb1bba76f10ece407f05fceff90b8.jar" />
     </item>
     <item
-        jar="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/classes-94e50e5d54d61935f7dd138a7da6f1990c61ec62.jar" />
+        <dex dex="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/classes-227e76cca3ef60c0b466aea524992d9bc4f51d7f.jar" />
     </item>
     <item
-        jar="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/classes-547c0d8b0263a8ec7d216fbc42029cc7713f1059.jar" />
+    </item>
+    <item
+        jar="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/classes-d313fc24117b43cc8926dc5ca20a24a04d21c37e.jar" />
+    </item>
+    <item
+        jar="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/home/ariel/repos/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-a6c005cadd589f7d8babdfc8879d134b0a6a5b3f.jar" />
+        <dex dex="/home/ariela/workspace/legendaryrandomizer/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-70e5932eabc82e87570165deeb0e93460576b2bb.jar" />
     </item>
 
 </items>
